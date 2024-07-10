@@ -1,0 +1,16 @@
+{
+  "name": "audio-guide-admin-back",
+  "version": "1.0.0",
+  "description": "This project will implement a http server in contact with the audio guide's database to better create, read, update and delete the Turist Points registered there.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}
