@@ -8,7 +8,7 @@ app.get('/',(req,res) => {
     res.send('Hello world!');
 });
 
-app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname,'..','public')));
 
 app.listen(port, ()=> {
     console.log(`Server running at localhost:${port}`);
