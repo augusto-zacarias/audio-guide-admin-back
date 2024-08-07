@@ -3,11 +3,14 @@ import path from 'path';
 import TuristPointRouter from './routes/TuristPoint';
 import UserRouter from './routes/User';
 import { checkAuth } from './middlewares/auth';
+import cors from 'cors';
 
 const app = express();
 const port = 3000;
 
-
+app.use(cors({
+  origin: '*'
+}));
 app.use(express.json());
 app.use(express.static(path.join(__dirname,'..','public')));
 
