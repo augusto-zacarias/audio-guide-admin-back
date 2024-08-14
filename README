@@ -5,3 +5,23 @@ This project will implement a http server in contact with the audio guide's data
 If you want more info on the working app, check this [instagram page](https://www.instagram.com/audioguidecg?igsh=MWQ3cDM5MHB3empsdA==)
 
 Link da documentação para a [API](https://app.swaggerhub.com/apis/AUGUSTOZACARIAS/Audio-Guide-Admin/1.0.0)
+
+## TO-DO
+- Criar DTOs para as coisas que vem do front
+- Criar Data Mappers entre DTO e objetos reais.
+- Verificar como funcionará interação entre objetos reais e o repositório. (Criar Data Mapper e novos objetos)
+
+## Code structure
+
+This project follows the MVC architecture pattern.
+
+### Model Layer
+* #### Prisma client
+* #### Repositories
+
+### View Layer
+* #### Controllers
+* #### Middlewares
+
+### Controller Layer
+* #### Services

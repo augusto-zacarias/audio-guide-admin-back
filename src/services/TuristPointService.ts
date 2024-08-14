@@ -1,11 +1,12 @@
 import { TuristPoint,EmptyTuristPoint } from '../Types';
 import TuristPointRepository from '../repositories/TuristPointRepository';
 
-export default class TuristPointController {
+export default class TuristPointService {
 
     turistPointRepository = new TuristPointRepository();
 
     async createTuristPoint(newTuristPoint:TuristPoint): Promise<TuristPoint> {
+        
         return EmptyTuristPoint();
     }
 

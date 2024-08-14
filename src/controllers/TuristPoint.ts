@@ -1,13 +1,13 @@
 import { Router } from 'express'
 import { HTTPError, TuristPoint } from '../Types';
-import TuristPointController from '../controllers/TuristPointController';
+import TuristPointService from '../services/TuristPointService';
 import { checkAdminAuth } from '../middlewares/auth';
 
 const TuristPointRouter = Router();
-const turistPointController = new TuristPointController()
+const turistPointService = new TuristPointService()
 
 TuristPointRouter.get('/',async (req,res,done)=>{
-    const turistPoints = await turistPointController.getAllTuristPoints();
+    const turistPoints = await turistPointService.getAllTuristPoints();
     return res.status(200).send(turistPoints);
 });
 
@@ -23,7 +23,7 @@ TuristPointRouter.get('/:id',async (req,res,done)=>{
 
     let turistPoint;
     try {
-        turistPoint = await turistPointController.getTuristPointById(turistPointNum);
+        turistPoint = await turistPointService.getTuristPointById(turistPointNum);
     } catch(e) {
         return res.status(404).send('Turist point not found')
     }
@@ -43,7 +43,7 @@ TuristPointRouter.post('/',checkAdminAuth,async (req,res,done)=>{
 
     let createdTuristPoint;
     try {
-        createdTuristPoint = await turistPointController.createTuristPoint(turistPoint);
+        createdTuristPoint = await turistPointService.createTuristPoint(turistPoint);
     } catch(e) {
         return res.status(409).send('This Turist Point already exists')
     }
@@ -72,7 +72,7 @@ TuristPointRouter.put('/:id',checkAdminAuth,async (req,res,done)=>{
 
     let updatedTuristPoint;
     try {
-        updatedTuristPoint = await turistPointController.updateTuristPoint(turistPointNum,turistPointBody);
+        updatedTuristPoint = await turistPointService.updateTuristPoint(turistPointNum,turistPointBody);
     } catch(e) {
         const error = e as HTTPError
         return res.status(error.statusCode).send(error.message)
@@ -94,7 +94,7 @@ TuristPointRouter.delete('/:id',checkAdminAuth,async (req,res,done)=>{
 
     let turistPoint;
     try {
-        turistPoint = await turistPointController.deleteTuristPoint(turistPointNum);
+        turistPoint = await turistPointService.deleteTuristPoint(turistPointNum);
     } catch(e) {
         return res.status(404).send('Turist point not found')
     }

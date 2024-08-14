@@ -1,7 +1,7 @@
 import UserRepository from "../repositories/UserRepository"
 import { User,HTTPError } from '../Types';
 
-export default class UserController {
+export default class UserService {
 
     userRepository = new UserRepository();
 

@@ -1,9 +1,9 @@
 import { Router } from 'express'
 import { User } from '../Types';
-import UserController from '../controllers/UserController';
+import UserService from '../services/UserService';
 
 const UserRouter = Router();
-const userController = new UserController()
+const userService = new UserService()
 
 UserRouter.post('/login',async (req,res,done)=>{
     
@@ -18,7 +18,7 @@ UserRouter.post('/login',async (req,res,done)=>{
 
     let user;
     try {
-        user = await userController.login(validUser);
+        user = await userService.login(validUser);
     } catch(e) {
         return res.status(404).send('User not found')
     }

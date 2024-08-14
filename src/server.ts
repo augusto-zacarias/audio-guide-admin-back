@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
-import TuristPointRouter from './routes/TuristPoint';
-import UserRouter from './routes/User';
+import TuristPointRouter from './controllers/TuristPoint';
+import UserRouter from './controllers/User';
 import { checkAuth } from './middlewares/auth';
 import cors from 'cors';
 
