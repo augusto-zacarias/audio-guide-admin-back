@@ -24,6 +24,22 @@ export interface TuristPoint {
     day7: string
 }
 
+export interface TuristPointDTO {
+    id?: number,
+    name:string,
+    latitude: number,
+    longitude: number,
+    address: string,
+    accessible: boolean,
+    entryPrice: number,
+    type: string,
+    transcript: string,
+    email?: string,
+    telephone?: string,
+    shouldContact: boolean,
+    days: string
+}
+
 export function EmptyTuristPoint(): TuristPoint {
     return {
         id:0,
@@ -80,13 +96,15 @@ export interface TuristImage {
     description?: string
 }
 
-export interface User {
+export interface UserDTO {
     username: string
     password: string
 }
 
-export interface UserDB extends User {
-    id: number
+export interface User {
+    username: string
+    password: string
+    isAdmin: boolean
 }
 
 export interface TuristAudio {

@@ -7,9 +7,8 @@ If you want more info on the working app, check this [instagram page](https://ww
 Link da documentação para a [API](https://app.swaggerhub.com/apis/AUGUSTOZACARIAS/Audio-Guide-Admin/1.0.0)
 
 ## TO-DO
-- Criar DTOs para as coisas que vem do front
-- Criar Data Mappers entre DTO e objetos reais.
-- Verificar como funcionará interação entre objetos reais e o repositório. (Criar Data Mapper e novos objetos)
+- Aperfeiçoar Data Mappers entre ponto turistico DTO e objetos reais.
+- Finalizar Data Mappers entre pontos turisticos reais e os do BD.
 
 ## Code structure
 

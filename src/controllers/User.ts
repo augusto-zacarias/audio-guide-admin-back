@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { User } from '../Types';
+import { User, UserDTO } from '../Types';
 import UserService from '../services/UserService';
 
 const UserRouter = Router();
@@ -9,14 +9,14 @@ UserRouter.post('/login',async (req,res,done)=>{
     
     const userJson = req.body;
 
-    let validUser;
+    let validUser: UserDTO;
     try {
-        validUser = userJson as User;
+        validUser = userJson as UserDTO;
     } catch(e) {
         return res.status(400).send('Indalid values for User')
     }
 
-    let user;
+    let user: User;
     try {
         user = await userService.login(validUser);
     } catch(e) {
