@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { HTTPError, TuristPoint } from '../Types';
+import { HTTPError, TuristPoint, TuristPointDTO } from '../Types';
 import TuristPointService from '../services/TuristPointService';
 import { checkAdminAuth } from '../middlewares/auth';
 
@@ -17,6 +17,7 @@ TuristPointRouter.get('/:id',async (req,res,done)=>{
     let turistPointNum;
     try {
         turistPointNum = parseInt(turistPointId);
+        if (isNaN(turistPointNum)) throw new Error()
     } catch(e) {
         return res.status(400).send('Indalid id passed')
     }
@@ -44,8 +45,8 @@ TuristPointRouter.post('/',checkAdminAuth,async (req,res,done)=>{
     let createdTuristPoint;
     try {
         createdTuristPoint = await turistPointService.createTuristPoint(turistPoint);
-    } catch(e) {
-        return res.status(409).send('This Turist Point already exists')
+    } catch(e: any) {
+        return res.status(409).send(e.message)
     }
 
     return res.status(201).send(createdTuristPoint);
@@ -59,6 +60,7 @@ TuristPointRouter.put('/:id',checkAdminAuth,async (req,res,done)=>{
     let turistPointNum;
     try {
         turistPointNum = parseInt(turistPointId);
+        if (isNaN(turistPointNum)) throw new Error()
     } catch(e) {
         return res.status(400).send('Indalid id passed')
     }
@@ -73,9 +75,8 @@ TuristPointRouter.put('/:id',checkAdminAuth,async (req,res,done)=>{
     let updatedTuristPoint;
     try {
         updatedTuristPoint = await turistPointService.updateTuristPoint(turistPointNum,turistPointBody);
-    } catch(e) {
-        const error = e as HTTPError
-        return res.status(error.statusCode).send(error.message)
+    } catch(e:any) {
+        return res.status(400).send(e.message)
     }
 
 
@@ -88,6 +89,7 @@ TuristPointRouter.delete('/:id',checkAdminAuth,async (req,res,done)=>{
     let turistPointNum;
     try {
         turistPointNum = parseInt(turistPointId);
+        if (isNaN(turistPointNum)) throw new Error()
     } catch(e) {
         return res.status(400).send('Indalid id passed')
     }
@@ -95,11 +97,15 @@ TuristPointRouter.delete('/:id',checkAdminAuth,async (req,res,done)=>{
     let turistPoint;
     try {
         turistPoint = await turistPointService.deleteTuristPoint(turistPointNum);
-    } catch(e) {
-        return res.status(404).send('Turist point not found')
+    } catch(e:any) {
+        return res.status(404).send(e.message)
     }
 
     return res.status(204).send();
 });
+
+// function validateTuristPointJson(turistPointJson: any): TuristPointDTO {
+    
+// }
 
 export default TuristPointRouter;

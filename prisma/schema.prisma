@@ -31,7 +31,7 @@ model point {
   day6             String?            @db.VarChar
   day7             String?            @db.VarChar
   accessible       Boolean?           @default(false)
-  point_type       point_type?        @relation(fields: [point_type_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  point_type       point_type?        @relation(fields: [point_type_id], references: [id], onDelete: NoAction, onUpdate: Cascade)
   point_audio      point_audio[]
   point_image      point_image[]
   point_name       point_name[]
@@ -44,8 +44,8 @@ model point_audio {
   point_id                                Int
   language                                String   @db.VarChar(30)
   duration                                Int?
-  language_point_audio_languageTolanguage language @relation("point_audio_languageTolanguage", fields: [language], references: [name], onDelete: NoAction, onUpdate: NoAction)
-  point                                   point    @relation(fields: [point_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  language_point_audio_languageTolanguage language @relation("point_audio_languageTolanguage", fields: [language], references: [name], onDelete: NoAction, onUpdate: Cascade)
+  point                                   point    @relation(fields: [point_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@unique([point_id, language])
 }
@@ -54,7 +54,7 @@ model point_image {
   id       String  @id @default(uuid()) @db.Uuid
   point_id Int
   credits  String?
-  point    point   @relation(fields: [point_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  point    point   @relation(fields: [point_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 }
 
 model point_name {
@@ -62,8 +62,8 @@ model point_name {
   point_id                               Int
   language                               String   @db.VarChar(30)
   name                                   String?  @db.VarChar(100)
-  language_point_name_languageTolanguage language @relation("point_name_languageTolanguage", fields: [language], references: [name], onDelete: NoAction, onUpdate: NoAction)
-  point                                  point    @relation(fields: [point_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  language_point_name_languageTolanguage language @relation("point_name_languageTolanguage", fields: [language], references: [name], onDelete: NoAction, onUpdate: Cascade)
+  point                                  point    @relation(fields: [point_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@unique([point_id, language])
 }
@@ -72,8 +72,8 @@ model point_tag {
   id       Int   @id @default(autoincrement())
   point_id Int
   tag_id   Int?
-  point    point @relation(fields: [point_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
-  tag      tag?  @relation(fields: [tag_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  point    point @relation(fields: [point_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  tag      tag?  @relation(fields: [tag_id], references: [id], onDelete: NoAction, onUpdate: Cascade)
 
   @@unique([point_id, tag_id])
 }
@@ -84,8 +84,8 @@ model point_transcript {
   language                                     String   @db.VarChar(30)
   text                                         String
   duration                                     Int?
-  language_point_transcript_languageTolanguage language @relation("point_transcript_languageTolanguage", fields: [language], references: [name], onDelete: NoAction, onUpdate: NoAction)
-  point                                        point    @relation(fields: [point_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  language_point_transcript_languageTolanguage language @relation("point_transcript_languageTolanguage", fields: [language], references: [name], onDelete: NoAction, onUpdate: Cascade)
+  point                                        point    @relation(fields: [point_id], references: [id], onDelete: Cascade, onUpdate: Cascade)
 
   @@unique([point_id, language])
 }
@@ -100,7 +100,7 @@ model point_type_language {
   point_type_id                                   Int?
   language                                        String   @db.VarChar(30)
   name                                            String?  @db.VarChar(30)
-  language_point_type_language_languageTolanguage language @relation("point_type_language_languageTolanguage", fields: [language], references: [name], onDelete: NoAction, onUpdate: NoAction)
+  language_point_type_language_languageTolanguage language @relation("point_type_language_languageTolanguage", fields: [language], references: [name], onDelete: NoAction, onUpdate: Cascade)
 
   @@unique([point_type_id, language])
 }
@@ -121,8 +121,8 @@ model tag_language {
   tag_id                                   Int
   language                                 String   @db.VarChar(30)
   name                                     String   @db.VarChar(30)
-  language_tag_language_languageTolanguage language @relation("tag_language_languageTolanguage", fields: [language], references: [name], onDelete: NoAction, onUpdate: NoAction)
-  tag                                      tag      @relation(fields: [tag_id], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  language_tag_language_languageTolanguage language @relation("tag_language_languageTolanguage", fields: [language], references: [name], onDelete: NoAction, onUpdate: Cascade)
+  tag                                      tag      @relation(fields: [tag_id], references: [id], onDelete: NoAction, onUpdate: Cascade)
 
   @@unique([tag_id, language])
 }

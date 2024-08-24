@@ -8,7 +8,7 @@ Link da documentação para a [API](https://app.swaggerhub.com/apis/AUGUSTOZACAR
 
 ## TO-DO
 - Aperfeiçoar Data Mappers entre ponto turistico DTO e objetos reais.
-- Finalizar Data Mappers entre pontos turisticos reais e os do BD.
+- Finalizar endpoint de update
 
 ## Code structure
 

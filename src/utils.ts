@@ -1,4 +1,4 @@
-import { user,point } from "@prisma/client"
+import { user } from "@prisma/client"
 import { TuristPoint, TuristPointDTO, User, UserDTO } from "./Types"
 
 export function PointToPointDTO(turistPoint:TuristPoint): TuristPointDTO {
@@ -11,7 +11,7 @@ export function PointToPointDTO(turistPoint:TuristPoint): TuristPointDTO {
         accessible: turistPoint.accessible,
         entryPrice: turistPoint.entryPrice,
         type: turistPoint.type,
-        transcript: turistPoint.transcript.text,
+        transcript: turistPoint.transcript.text!,
         email: turistPoint.email,
         telephone: turistPoint.telephone,
         shouldContact: turistPoint.shouldContact,
@@ -31,14 +31,13 @@ export function PointDTOToPoint(dto:TuristPointDTO): TuristPoint {
         type: dto.type,
         tags: [],
         transcript: {
-            path: "",
             language: 'pt',
             duration: 0,
             text: ""
         },
         images: [],
         audio: {
-            path: "",
+            id: "",
             language: "pt",
             duration: 0
         },
@@ -55,18 +54,6 @@ export function PointDTOToPoint(dto:TuristPointDTO): TuristPoint {
         day7: dto.days
     }
 }
-
-// export function PointToPointDB(turistPoint:TuristPoint): point {
-//     return {
-
-//     }
-// }
-
-// export function PointDBToPoint(turistPoint:point): TuristPoint {
-//     return {
-
-//     }
-// }
 
 export function UserToUserDTO(user:User): UserDTO {
     return {

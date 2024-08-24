@@ -52,7 +52,6 @@ export function EmptyTuristPoint(): TuristPoint {
         type: '',
         tags: [''],
         transcript: {
-            path: '',
             language: 'pt',
             duration: 0,
             text: ''
@@ -62,7 +61,7 @@ export function EmptyTuristPoint(): TuristPoint {
             credits: '',
         }],
         audio: {
-            path: '',
+            id: '',
             language: 'pt',
             duration: 0
         },
@@ -92,7 +91,7 @@ export class HTTPError {
 
 export interface TuristImage {
     id: string
-    credits: string
+    credits: string | null
     description?: string
 }
 
@@ -108,41 +107,52 @@ export interface User {
 }
 
 export interface TuristAudio {
-    path: string
+    id: string
     language: 'pt' | 'en'
-    duration: number
+    duration: number | null
 }
 
 export interface TuristTranscript {
-    path: string
     language: 'pt' | 'en'
-    duration: number
-    text: string
+    duration: number | null
+    text: string | null
+}
+
+export interface TuristName {
+    language: 'pt' | 'en'
+    name: string | null
+}
+
+export interface TuristTag {
+    tag_id: number | null
+}
+
+export interface TuristType {
+    id: number | null
 }
 
 export interface TuristPointDB {
     id: number
-    name: string
     latitude: number
     longitude: number
     address: string
-    entry_price?: number
-    email?: string
-    phone?: string
-    type: string
-    should_contact?: boolean
-    day1?: string
-    day2?: string
-    day3?: string
-    day4?: string
-    day5?: string
-    day6?: string
-    day7?: string
-    accessible?: boolean
-    language: string
-
-    //audios
-    //images
-    //tags
-    //transcripts
+    entry_price: number | null | undefined
+    email: string | null | undefined
+    phone: string | null | undefined
+    point_type_id: number | null
+    should_contact: boolean | null | undefined
+    day1: string | null | undefined
+    day2: string | null | undefined
+    day3: string | null | undefined
+    day4: string | null | undefined
+    day5: string | null | undefined
+    day6: string | null | undefined
+    day7: string | null | undefined
+    accessible: boolean | null | undefined
+    point_audio: TuristAudio[]
+    point_image: TuristImage[]
+    point_name: TuristName[]
+    point_tag: TuristTag[]
+    point_transcript: TuristTranscript[]
+    point_type?: TuristType | null
 }
