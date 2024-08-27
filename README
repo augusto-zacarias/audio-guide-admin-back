@@ -6,9 +6,9 @@ If you want more info on the working app, check this [instagram page](https://ww
 
 Link da documentação para a [API](https://app.swaggerhub.com/apis/AUGUSTOZACARIAS/Audio-Guide-Admin/1.0.0)
 
-## TO-DO
-- Aperfeiçoar Data Mappers entre ponto turistico DTO e objetos reais.
-- Finalizar endpoint de update
+## How to Run
+Make sure to run `npx prisma migrate dev` to instantiate the database and fill it with the necessary data from the **Prisma seed** before testing the endpoints.  
+Also make sure to have an `Authoriaztion` headers when making calls reading or writing to the points database.
 
 ## Code structure
 

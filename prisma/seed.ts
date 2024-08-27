@@ -27,7 +27,6 @@ async function main() {
         isAdmin: false
     },
   })
-  console.log({ admin, user })
   
   const pointTypesIds = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16].map(id => ({ id }))
   await prisma.point_type.createMany({
@@ -84,6 +83,10 @@ async function main() {
   await prisma.point_type_language.createMany({
     data: point_type_language,
   })
+
+  console.log('Created admin and user')
+  console.log({ admin, user })
+  console.log('Filled all the necessary point object helpers into the database!')
 }
 main()
   .then(async () => {
