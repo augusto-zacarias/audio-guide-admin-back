@@ -1,5 +1,5 @@
 import { PrismaClient, point } from '@prisma/client'
-import { TuristPoint,TuristPointDB } from '../Types';
+import { TuristPoint,TuristPointDB } from '../Types.js';
 
 export default class TuristPointRepository {
 

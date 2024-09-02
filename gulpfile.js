@@ -1,12 +1,11 @@
 'use strict'
 
-
-// DEPENDENCIES
-const gulp = require('gulp'),
-   tslint = require('gulp-tslint'),
-   ts = require('gulp-typescript'),
-   nodemon = require('gulp-nodemon')
-
+import gulp from 'gulp'
+import tslint from 'gulp-tslint'
+import ts from 'gulp-typescript'
+import nodemon from 'gulp-nodemon'
+import typescript from 'typescript'
+import { exec } from 'child_process'
 
 // TSLINT
 gulp.task('ts-lint', () => {
@@ -31,9 +30,9 @@ gulp.task('copy-files', () => {
 gulp.task('watch', (done) => {
    gulp.watch('./**/*.ts')
    nodemon({
-       script: 'dist/server.js',
        tasks: ['build'],
-       ext: 'ts json',
+       ext: 'ts, json',
+       exec: 'ts-node --esm ./src/server.ts',
        ignore: ['node_modules/', 'package.json', 'tsconfig.json']
    }).on('restart', () => {
        console.log('##################################### // ######################################')
@@ -49,7 +48,7 @@ gulp.task('watch', (done) => {
 gulp.task('build', gulp.series(['ts-lint', 'copy-files'], function compiler() {
        const tsProject = ts.createProject(
            'tsconfig.json',
-           {typescript: require('typescript')}
+           {typescript: typescript}
        )
        return tsProject.src()
            .pipe(tsProject())

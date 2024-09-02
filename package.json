@@ -3,10 +3,12 @@
   "version": "1.0.0",
   "description": "This project will implement a http server in contact with the audio guide's database to better create, read, update and delete the Turist Points registered there.",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "build": "gulp build",
     "start": "node dist/src/server.js",
-    "dev": "gulp dev"
+    "dev": "gulp dev",
+    "test": "mocha --require ts-node/register test/**/*.spec.ts"
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
@@ -21,11 +23,14 @@
     "gulp-cli": "^3.0.0"
   },
   "devDependencies": {
+    "@types/chai": "^4.3.19",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/mocha": "^10.0.7",
     "@types/node": "^20.14.11",
     "@typescript-eslint/eslint-plugin": "^7.16.1",
     "@typescript-eslint/parser": "^7.16.1",
+    "chai": "^5.1.1",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
@@ -33,6 +38,7 @@
     "gulp-nodemon": "^2.5.0",
     "gulp-tslint": "^8.1.4",
     "gulp-typescript": "^6.0.0-alpha.1",
+    "mocha": "^10.7.3",
     "nodemon": "^3.1.4",
     "prettier": "^3.3.3",
     "prisma": "^5.17.0",

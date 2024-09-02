@@ -1,6 +1,6 @@
-import UserRepository from "../repositories/UserRepository"
-import { UserDTO,HTTPError,User } from '../Types';
-import { UserDBToUser, UserDTOToUser } from "../utils";
+import UserRepository from "../repositories/UserRepository.js"
+import { UserDTO,HTTPError,User } from '../Types.js';
+import { UserDBToUser, UserDTOToUser } from "../utils.js";
 
 export default class UserService {
 

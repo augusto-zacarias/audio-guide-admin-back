@@ -1,5 +1,5 @@
-import { TuristPoint,EmptyTuristPoint } from '../Types';
-import TuristPointRepository from '../repositories/TuristPointRepository';
+import { TuristPoint,EmptyTuristPoint } from '../Types.js';
+import TuristPointRepository from '../repositories/TuristPointRepository.js';
 
 export default class TuristPointService {
 
