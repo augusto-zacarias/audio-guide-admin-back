@@ -1,6 +1,7 @@
 import { Router } from 'express'
-import { User, UserDTO } from '../Types';
-import UserService from '../services/UserService';
+import { User, UserDTO } from '../Types.js';
+import UserService from '../services/UserService.js';
+import { createJWT } from '../middlewares/auth.js';
 
 const UserRouter = Router();
 const userService = new UserService()
@@ -23,12 +24,9 @@ UserRouter.post('/login',async (req,res,done)=>{
         return res.status(404).send('User not found')
     }
 
-    console.log(validUser);
-    console.log(user);
+    const token = createJWT(user.username);
 
-    //res.appendHeader('authorization','true')
-
-    return res.status(200).send('You are now authenticated!!!');
+    return res.status(200).send({token:token});
 });
 
 function validateUserJson(userJson: any): UserDTO {

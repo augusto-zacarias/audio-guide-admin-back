@@ -1,5 +1,5 @@
 import { user } from "@prisma/client"
-import { TuristPoint, TuristPointDTO, User, UserDTO } from "./Types"
+import { TuristPoint, TuristPointDTO, User, UserDTO } from "./Types.js"
 
 export function PointToPointDTO(turistPoint:TuristPoint): TuristPointDTO {
     return {

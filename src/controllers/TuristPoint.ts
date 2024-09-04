@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import { HTTPError, TuristPoint, TuristPointDTO } from '../Types';
-import TuristPointService from '../services/TuristPointService';
-import { checkAdminAuth } from '../middlewares/auth';
+import { TuristPoint } from '../Types.js';
+import TuristPointService from '../services/TuristPointService.js';
+import { checkAdminAuth } from '../middlewares/auth.js';
 
 const TuristPointRouter = Router();
 const turistPointService = new TuristPointService()
@@ -103,9 +103,5 @@ TuristPointRouter.delete('/:id',checkAdminAuth,async (req,res,done)=>{
 
     return res.status(204).send();
 });
-
-// function validateTuristPointJson(turistPointJson: any): TuristPointDTO {
-    
-// }
 
 export default TuristPointRouter;

@@ -5,7 +5,6 @@ import tslint from 'gulp-tslint'
 import ts from 'gulp-typescript'
 import nodemon from 'gulp-nodemon'
 import typescript from 'typescript'
-import { exec } from 'child_process'
 
 // TSLINT
 gulp.task('ts-lint', () => {
@@ -31,8 +30,8 @@ gulp.task('watch', (done) => {
    gulp.watch('./**/*.ts')
    nodemon({
        tasks: ['build'],
-       ext: 'ts, json',
-       exec: 'ts-node --esm ./src/server.ts',
+       ext: 'ts json',
+       exec: 'ts-node dist/src/server.js',
        ignore: ['node_modules/', 'package.json', 'tsconfig.json']
    }).on('restart', () => {
        console.log('##################################### // ######################################')
