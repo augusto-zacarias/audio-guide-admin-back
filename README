@@ -24,3 +24,14 @@ This project follows the MVC architecture pattern.
 
 ### Controller Layer
 * #### Services
+
+
+#### Changes To-Do
+* Add bcrypt so that passwords aren't stored on the DB
+
+* Add BD mocking before each integration and unit tests
+* To make integration tests, make calls to the Controllers instead of actually running the server
+* Test the methods inside the services
+
+* Paginação
+* Logs?
