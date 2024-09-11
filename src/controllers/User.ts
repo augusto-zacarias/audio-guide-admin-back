@@ -14,14 +14,37 @@ UserRouter.post('/login',async (req,res,done)=>{
     try {
         validUser = validateUserJson(userJson);
     } catch(e) {
-        return res.status(400).send('Indalid values for User')
+        return res.status(400).send({error:'Indalid values for User'})
     }
 
     let user: User;
     try {
         user = await userService.login(validUser);
     } catch(e) {
-        return res.status(404).send('User not found')
+        return res.status(404).send({error:'User not found'})
+    }
+
+    const token = createJWT(user.username);
+
+    return res.status(200).send({token:token});
+});
+
+UserRouter.post('/register',async (req,res,done)=>{
+    
+    const userJson = req.body;
+
+    let validUser: UserDTO;
+    try {
+        validUser = validateUserJson(userJson);
+    } catch(e) {
+        return res.status(400).send({error:'Indalid values for User'})
+    }
+
+    let user: User;
+    try {
+        user = await userService.register(validUser);
+    } catch(e) {
+        return res.status(400).send({error:'User with username already exists'})
     }
 
     const token = createJWT(user.username);
@@ -34,6 +57,9 @@ function validateUserJson(userJson: any): UserDTO {
         throw new Error('Invalid values for User');
     }
     if (Object.keys(userJson).length !== 2) {
+        throw new Error('Invalid values for User');
+    }
+    if ((userJson.username as string).trim().length === 0 || (userJson.password as string).trim().length === 0) {
         throw new Error('Invalid values for User');
     }
     return {

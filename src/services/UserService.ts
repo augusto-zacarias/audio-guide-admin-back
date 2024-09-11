@@ -16,4 +16,15 @@ export default class UserService {
 
         return UserDBToUser(recoveredUser)
     }
+
+    async register(user:UserDTO):Promise<User> {
+        const recoveredUser = await this.userRepository.getUserByUsername(user.username);
+        if (recoveredUser !== null) throw new HTTPError(400,'User with that username already exists');
+
+        const hashedPass = await bcrypt.hash(user.password,10);
+        user.password = hashedPass;
+        const createdUser = await this.userRepository.createUser(UserDTOToUser(user));
+
+        return UserDBToUser(createdUser!)
+    }
 }

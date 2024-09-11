@@ -24,4 +24,15 @@ export default class UserRepository {
         return foundUser
     }
 
+    async createUser(user:User):Promise<user | null> {
+        const foundUser = await this.prismaClient.user.create({
+            data: {
+                username: user.username,
+                password: user.password,
+                isAdmin: true
+            }
+        })
+        return foundUser
+    }
+
 }

@@ -42,6 +42,7 @@ export default class TuristPointRepository {
 
     async createTuristPoint(newTuristPoint:TuristPoint): Promise<TuristPoint> {
 
+        
         const point_type = await this.prismaClient.point_type_language.findFirst({
             where: {
                 name: newTuristPoint.type,
@@ -69,55 +70,59 @@ export default class TuristPointRepository {
             throw new Error("Invalid tags with language")
         }
 
-        const newPoint = (await this.prismaClient.point.create({
-            data: {
-                latitude: newTuristPoint.latitude,
-                longitude: newTuristPoint.longitude,
-                address: newTuristPoint.address,
-                entry_price: newTuristPoint.entryPrice,
-                email: newTuristPoint.email,
-                phone: newTuristPoint.telephone,
-                point_type_id: point_type.point_type_id,
-                should_contact: newTuristPoint.shouldContact,
-                day1: newTuristPoint.day1,
-                day2: newTuristPoint.day2,
-                day3: newTuristPoint.day3,
-                day4: newTuristPoint.day4,
-                day5: newTuristPoint.day5,
-                day6: newTuristPoint.day6,
-                day7: newTuristPoint.day7,
-                accessible: newTuristPoint.accessible,
-                point_audio: {
-                    create: [{
-                        duration: newTuristPoint.audio.duration,
-                        language: 'pt'
-                    }]
-                },
-                point_image: {
-                    create: newTuristPoint.images.map(image=>{
-                        return {
-                            credits: image.credits
-                        }
-                    })
-                },
-                point_name: {
-                    create: [{
-                        language: 'pt',
-                        name: newTuristPoint.name
-                    }]
-                },
-                point_tag: {
-                    create: tagIds
-                },
-                point_transcript: {
-                    create: [{
-                        text: newTuristPoint.transcript.text!,
-                        duration: newTuristPoint.transcript.duration,
-                        language: newTuristPoint.transcript.language
-                    }]
-                },
-                
+        let createData:any = {
+            latitude: newTuristPoint.latitude,
+            longitude: newTuristPoint.longitude,
+            address: newTuristPoint.address,
+            entry_price: newTuristPoint.entryPrice,
+            email: newTuristPoint.email,
+            phone: newTuristPoint.telephone,
+            point_type_id: point_type.point_type_id,
+            should_contact: newTuristPoint.shouldContact,
+            day1: newTuristPoint.day1,
+            day2: newTuristPoint.day2,
+            day3: newTuristPoint.day3,
+            day4: newTuristPoint.day4,
+            day5: newTuristPoint.day5,
+            day6: newTuristPoint.day6,
+            day7: newTuristPoint.day7,
+            accessible: newTuristPoint.accessible,
+            point_audio: {
+                create: [{
+                    duration: newTuristPoint.audio.duration,
+                    language: 'pt'
+                }]
             },
+            point_image: {
+                create: newTuristPoint.images.map(image=>{
+                    return {
+                        credits: image.credits
+                    }
+                })
+            },
+            point_name: {
+                create: [{
+                    language: 'pt',
+                    name: newTuristPoint.name
+                }]
+            },
+            point_tag: {
+                create: tagIds
+            },
+            point_transcript: {
+                create: [{
+                    text: newTuristPoint.transcript.text!,
+                    duration: newTuristPoint.transcript.duration,
+                    language: newTuristPoint.transcript.language
+                }]
+            },
+            
+        }
+        if (newTuristPoint.id) {
+            createData.id = newTuristPoint.id;
+        }
+        const newPoint = (await this.prismaClient.point.create({
+            data: createData,
             ...this.FIND_POINT_OPTIONS
         })) as TuristPointDB
 
@@ -348,8 +353,4 @@ export default class TuristPointRepository {
         }
     }
 
-    // async PointToPointDB(turistPoint:TuristPoint): TuristPointDB {
-    //     return {
-    //     }
-    // }
 }

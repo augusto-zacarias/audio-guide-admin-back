@@ -13,20 +13,20 @@ async function getUserInToken(req:Request,res:Response,errorCode:number):Promise
     const authHeader = req.headers.authorization;
 
     if (authHeader == null) {
-        res.status(errorCode).json({errorMsg: "Unauthorized user"});
+        res.status(errorCode).json({error: "Unauthorized user"});
         return null;
     }
 
     const parts = authHeader.split(' ');
 
     if (parts.length !== 2) {
-        res.status(errorCode).json({ errorMsg: 'Token with incorrect length' });
+        res.status(errorCode).json({ error: 'Token with incorrect length' });
         return null;
     }
     const [scheme, token] = parts;
 
     if (!/^Bearer$/i.test(scheme)) {
-        res.status(errorCode).send({ errorMsg: 'Not Bearer Token' });
+        res.status(errorCode).send({ error: 'Not Bearer Token' });
         return null;
     }
 
@@ -35,7 +35,7 @@ async function getUserInToken(req:Request,res:Response,errorCode:number):Promise
     try {
         parsedDecoded = jwt.verify(token, process.env.JWT_SECRET!) as {username:string};
     } catch (e) {
-        res.status(errorCode).send({ errorMsg: 'Unauthorized Token' });
+        res.status(errorCode).send({ error: 'Unauthorized Token' });
         return null;
     }
 

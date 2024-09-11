@@ -27,10 +27,5 @@ This project follows the MVC architecture pattern.
 
 
 #### Changes To-Do
-* Add BD mocking before each integration and unit tests
-* To make integration tests, make calls to the Controllers instead of actually running the server
-
-* Add new integration tests where inputs is passed to the server with incomplete values (i.e. empty strings, undefineds, 0 values on ints)
-
-* Paginação
-* Logs?
+* Paginação? Maybe 
+* Logs? Maybe
