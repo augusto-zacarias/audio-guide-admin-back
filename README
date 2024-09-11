@@ -27,11 +27,10 @@ This project follows the MVC architecture pattern.
 
 
 #### Changes To-Do
-* Add bcrypt so that passwords aren't stored on the DB
-
 * Add BD mocking before each integration and unit tests
 * To make integration tests, make calls to the Controllers instead of actually running the server
-* Test the methods inside the services
+
+* Add new integration tests where inputs is passed to the server with incomplete values (i.e. empty strings, undefineds, 0 values on ints)
 
 * Paginação
 * Logs?
