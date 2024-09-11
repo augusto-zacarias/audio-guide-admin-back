@@ -1,10 +1,14 @@
-import { expect } from 'chai';
-import app from '../../src/server.js'; // Assuming your Express app is exported as 'app'
+import chai, { expect } from 'chai';
+import chaiHttp from 'chai-http';
+import app from '../../src/server';
+
+chai.use(chaiHttp);
+const requester = await chai.request.agent(app).keepOpen()
 
 describe('TuristPoint Routes', () => {
     describe('GET /turistPoint', () => {
         it('should return all turist points', async () => {
-            const res = await request(app).get('/turistPoint');
+            const res = await requester.get('/turistPoint').auth();
             expect(res.status).to.equal(200);
             expect(res.body).to.be.an('array');
         });
