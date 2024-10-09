@@ -104,7 +104,7 @@ TuristPointRouter.delete('/:id',checkAdminAuth,async (req,res,done)=>{
 });
 
 function validateTuristPoint(userJson: any): TuristPoint {
-    if (typeof userJson.id !== 'number' || typeof userJson.name !== 'string'
+    if (typeof userJson.name !== 'string'
         || typeof userJson.latitude !== 'number' || typeof userJson.longitude !== 'number'
         || typeof userJson.address !== 'string' || typeof userJson.entryPrice !== 'number'
         || typeof userJson.type !== 'string' || typeof userJson.accessible !== 'boolean'
@@ -118,7 +118,7 @@ function validateTuristPoint(userJson: any): TuristPoint {
     ) {
         throw new Error('Invalid values for User');
     }
-    if (Object.keys(userJson).length !== 23) {
+    if (Object.keys(userJson).length !== 23 && Object.keys(userJson).length !== 22) {
         throw new Error('Invalid values for User');
     }
     if ((userJson.name as string).trim().length === 0 || (userJson.address as string).trim().length === 0
